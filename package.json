@@ -4,12 +4,14 @@
   "description": "Simple HTTP server to serve the contents of a folder",
   "main": "./lib/serve-up-server.js",
   "scripts": {
+    "start": "node ./bin/serve-up"
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git://github.com/gangleri/serveup.git"
   },
+  "keywords" : ["cli", "command", "http", "server"]
   "author": "Alan Bradley",
   "license": "BSD-2-Clause",
   "bugs": {
