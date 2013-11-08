@@ -1,0 +1,33 @@
+#!/usr/bin/env node
+
+var optimist = require('optimist')
+    .options('p', {alias: 'port', default: '8080', description: 'port used to listen on.'})
+    .options('d', {alias: 'default', default: 'index.html', description: 'The default page to load.'})
+    .options('l', {alias: 'dirlist', boolean:true, default: true, description: 'Allow listing of directory contents.' })
+    .options('s', {alias: 'silent', boolean: true, default: false, description: 'Silent mode no information will be written to the console'})
+    .options('h', {alias: 'help', description: 'Show this menu menu'})
+    .usage('Server the contents of a directory.\nUsage: serve-up [options] dir'),
+    argv = optimist.argv,
+    serveUpServer = require('../lib/serve-up-server');
+
+var log = (argv.s || argv.silent) ? (function(){}) : console.log,
+    port = (argv.p || argv.port) || 8080,
+    defaultPage = (argv.d || argv.default) || 'index.html',
+    root = argv._ || process.cwd(),
+    listDir = true
+
+
+if(argv.h || argv.help) optimist.showHelp()
+else startServer()
+
+
+function startServer() {
+  serveUpServer.createServer({
+      root: root,
+      defaultPage: defaultPage,
+      listDir: listDir,
+      port: port,
+      log: log
+  });
+}
+
